@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lenovo System Management</title>
+    <style>
+        /* 全局样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #ffffff; /* 纯白色背景 */
+        }
+
+        /* 导航栏容器 - 缩小尺寸 */
+        .navbar {
+            background-color: #252525;
+            width: 100%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            height: 45px; /* 固定导航栏高度 */
+            line-height: 45px; /* 行高与高度一致，垂直居中 */
+        }
+
+        .nav-container {
+            max-width: 100%; /* 全屏宽度 */
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between; /* 关键：两端对齐 */
+            align-items: center;
+            padding: 0 20px;
+            height: 100%; /* 继承导航栏高度 */
+        }
+
+        /* 菜单容器 - 靠左 */
+        .menu-wrapper {
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+
+        /* Lenovo图标样式 - 缩小尺寸，靠右侧 */
+        .lenovo-logo {
+            height: 30px; /* 缩小图标尺寸 */
+            padding: 2px 0;
+        }
+
+        /* 导航菜单样式 */
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            height: 100%; /* 继承高度 */
+        }
+
+        .nav-item {
+            position: relative;
+            margin: 0 12px;
+            height: 100%; /* 继承高度 */
+        }
+
+        .nav-link {
+            display: block;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 0 12px; /* 只保留左右内边距 */
+            font-size: 14px; /* 缩小字体 */
+            font-weight: 500;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            height: 100%; /* 继承高度 */
+        }
+
+        .nav-link:hover {
+            color: #00a8ff;
+            background-color: rgba(255, 255, 255, 0.1); /* 悬停背景色 */
+        }
+
+        /* 下拉菜单样式 - 位置微调 */
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #ffffff;
+            min-width: 160px; /* 缩小下拉菜单宽度 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 2px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(5px);
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .dropdown li {
+            list-style: none;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .dropdown li:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-link {
+            display: block;
+            color: #333333;
+            text-decoration: none;
+            padding: 8px 12px; /* 缩小子菜单内边距 */
+            font-size: 13px; /* 缩小子菜单字体 */
+            transition: all 0.2s ease;
+        }
+
+        .dropdown-link:hover {
+            background-color: #f5f7fa;
+            color: #00a8ff;
+            padding-left: 15px;
+        }
+
+        /* 悬停显示下拉菜单 */
+        .nav-item:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* 响应式适配 */
+        @media (max-width: 768px) {
+            .navbar {
+                height: auto; /* 移动端恢复自动高度 */
+                line-height: normal;
+            }
+            
+            .nav-container {
+                flex-direction: column;
+                padding: 8px;
+                align-items: center; /* 移动端居中显示 */
+            }
+
+            .menu-wrapper {
+                width: 100%;
+                justify-content: center;
+                margin-bottom: 5px;
+            }
+
+            .lenovo-logo {
+                margin-bottom: 5px;
+            }
+
+            .nav-menu {
+                flex-direction: column;
+                width: 100%;
+                margin-top: 5px;
+            }
+
+            .nav-item {
+                margin: 3px 0;
+                text-align: center;
+                height: auto;
+            }
+
+            .nav-link {
+                padding: 8px 0;
+            }
+
+            .dropdown {
+                position: static;
+                width: 100%;
+                margin-top: 3px;
+            }
+        }
+
+        /* 页面内容区域 - 清空内容，只保留空白 */
+        .content {
+            width: 100%;
+            min-height: calc(100vh - 45px); /* 占满剩余视口高度 */
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <!-- 菜单容器（靠左） -->
+            <div class="menu-wrapper">
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">System</a>
+                        <!-- System下拉菜单 -->
+                        <ul class="dropdown">
+                            <li><a href="#" class="dropdown-link">ASN</a></li>
+                            <li><a href="http://10.176.115.190:15633/" class="dropdown-link" target="_blank">ONE BOARD</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Forecast</a>
+                        <ul class="dropdown">
+                            <li><a href="#" class="dropdown-link">Forecast Item 1</a></li>
+                            <li><a href="#" class="dropdown-link">Forecast Item 2</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Excution</a>
+                        <ul class="dropdown">
+                            <li><a href="#" class="dropdown-link">Excution Item 1</a></li>
+                            <li><a href="#" class="dropdown-link">Excution Item 2</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">MRT</a>
+                        <ul class="dropdown">
+                            <li><a href="#" class="dropdown-link">MRT Item 1</a></li>
+                            <li><a href="#" class="dropdown-link">MRT Item 2</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Lenovo图标（靠右侧） -->
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Lenovo_logo_2017.svg/2560px-Lenovo_logo_2017.svg.png" 
+                 alt="LENOVO" class="lenovo-logo">
+        </div>
+    </nav>
+
+    <!-- 空白内容区域 -->
+    <div class="content"></div>
+</body>
+</html>
