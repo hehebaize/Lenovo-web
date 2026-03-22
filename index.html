@@ -17,6 +17,28 @@
             background-color: #f5f8fa; /* 浅蓝灰背景，适配企业蓝调 */
         }
 
+        /* 标题栏样式 - 居中显示 */
+        .title-bar {
+            background-color: #ffffff; /* 白色背景，突出标题 */
+            width: 100%;
+            padding: 12px 40px; /* 上下内边距，左右留白 */
+            border-bottom: 1px solid #e8f4f8; /* 浅天蓝分隔线，呼应导航栏风格 */
+            text-align: center; /* 核心：文字居中 */
+        }
+
+        .title-text {
+            /* 蓝到绿渐变色 - 企业级柔和渐变 */
+            background: linear-gradient(90deg, #0f3460 0%, #008080 100%);
+            -webkit-background-clip: text; /* 文字渐变核心属性（webkit内核） */
+            background-clip: text; /* 标准属性 */
+            color: transparent; /* 隐藏原文字颜色，显示渐变 */
+            
+            font-size: 28px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            display: inline-block; /* 保证居中效果更稳定 */
+        }
+
         /* 导航栏容器 - 深海蓝主色 */
         .navbar {
             background-color: #0f3460; /* 深海蓝主色，企业级沉稳色调 */
@@ -27,6 +49,7 @@
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
             height: 60px;
             line-height: 60px;
+            margin-top: 0;
         }
 
         .nav-container {
@@ -142,6 +165,15 @@
 
         /* 响应式适配 */
         @media (max-width: 768px) {
+            /* 移动端标题栏适配（已默认居中，仅调整尺寸） */
+            .title-bar {
+                padding: 10px 15px;
+            }
+            
+            .title-text {
+                font-size: 16px;
+            }
+
             .navbar {
                 height: auto;
                 line-height: normal;
@@ -188,15 +220,20 @@
             }
         }
 
-        /* 页面内容区域 */
+        /* 页面内容区域 - 调整高度，适配标题栏 */
         .content {
             width: 100%;
-            min-height: calc(100vh - 60px);
+            min-height: calc(100vh - 60px - 46px); /* 减去标题栏高度（46px）+ 导航栏高度（60px） */
             background-color: #f5f8fa;
         }
     </style>
 </head>
 <body>
+    <!-- 标题栏（居中） -->
+    <div class="title-bar">
+        <h1 class="title-text">NB China Site Buyer </h1>
+    </div>
+
     <!-- 导航栏 -->
     <nav class="navbar">
         <div class="nav-container">
@@ -236,41 +273,7 @@
             </div>
             
             <!-- Lenovo图标（靠右侧） -->
-            <img src="D:\lenovo web/Lenovo-China-logo.png" 
-                 alt="LENOVO" class="lenovo-logo">
-        </div>
-    </nav>
-
-    <!-- 空白内容区域 -->
-    <div class="content"></div>
-</body>
-</html>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">Forecast</a>
-                        <ul class="dropdown">
-                            <li><a href="#" class="dropdown-link">Forecast Item 1</a></li>
-                            <li><a href="#" class="dropdown-link">Forecast Item 2</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">Excution</a>
-                        <ul class="dropdown">
-                            <li><a href="#" class="dropdown-link">Excution Item 1</a></li>
-                            <li><a href="#" class="dropdown-link">Excution Item 2</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">MRT</a>
-                        <ul class="dropdown">
-                            <li><a href="#" class="dropdown-link">MRT Item 1</a></li>
-                            <li><a href="#" class="dropdown-link">MRT Item 2</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            
-            <!-- Lenovo图标（靠右侧） -->
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Lenovo_logo_2017.svg/2560px-Lenovo_logo_2017.svg.png" 
+            <img src="lenovo web/Lenovo-China-logo.png" 
                  alt="LENOVO" class="lenovo-logo">
         </div>
     </nav>
